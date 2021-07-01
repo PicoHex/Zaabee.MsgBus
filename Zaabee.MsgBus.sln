@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.MsgBus.Abstractions", "Zaabee.MsgBus.Abstractions\Zaabee.MsgBus.Abstractions.csproj", "{685299BE-F64D-4F6F-AEC4-0A82A2C6A998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.MsgBus", "Zaabee.MsgBus\Zaabee.MsgBus.csproj", "{7A645E93-7230-4DD9-91B1-7E6C1D8B5B3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.MsgBus.RabbitMQ", "Zaabee.MsgBus.RabbitMQ\Zaabee.MsgBus.RabbitMQ.csproj", "{C8D1B189-6869-47F7-959C-9A78023C9E09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{685299BE-F64D-4F6F-AEC4-0A82A2C6A998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{685299BE-F64D-4F6F-AEC4-0A82A2C6A998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{685299BE-F64D-4F6F-AEC4-0A82A2C6A998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{685299BE-F64D-4F6F-AEC4-0A82A2C6A998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A645E93-7230-4DD9-91B1-7E6C1D8B5B3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A645E93-7230-4DD9-91B1-7E6C1D8B5B3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A645E93-7230-4DD9-91B1-7E6C1D8B5B3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A645E93-7230-4DD9-91B1-7E6C1D8B5B3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D1B189-6869-47F7-959C-9A78023C9E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D1B189-6869-47F7-959C-9A78023C9E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D1B189-6869-47F7-959C-9A78023C9E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D1B189-6869-47F7-959C-9A78023C9E09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
