@@ -11,16 +11,32 @@ namespace Zaabee.MsgBus
 {
     public class ZaabeeMsgBus : IZaabeeMsgBus
     {
-        private readonly IDbConnection _connection;
-        private readonly IDbTransaction _transaction;
+        private IDbConnection Connection { get; set; }
+        private IDbTransaction _transaction;
+
+        public IDbTransaction Transaction
+        {
+            get => _transaction;
+            set
+            {
+                _transaction = value;
+                Connection = _transaction.Connection;
+            }
+        }
+
+        public ZaabeeMsgBus()
+        {
+
+        }
 
         public ZaabeeMsgBus(IDbTransaction transaction)
         {
-            _connection = transaction.Connection;
-            _transaction = transaction;
+            Connection = transaction.Connection;
+            Transaction = transaction;
         }
 
-        public void Publish<T>(T message) => Publish(typeof(T).Namespace, message);
+        public void Publish<T>(T message) =>
+            Publish(typeof(T).Namespace, message);
 
         public void Publish<T>(string topic, T message)
         {
@@ -29,9 +45,9 @@ namespace Zaabee.MsgBus
                 Id = SequentialGuidHelper.GenerateComb(),
                 Topic = topic,
                 Data = JsonSerializer.Serialize(message),
-                PersistentUtcTime = DateTime.UtcNow
+                CreatedUtcTime = DateTime.UtcNow
             };
-            _connection.Add(unpublishedMessage, _transaction);
+            Connection.Add(unpublishedMessage, Transaction);
         }
 
         public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default) =>
@@ -44,9 +60,9 @@ namespace Zaabee.MsgBus
                 Id = SequentialGuidHelper.GenerateComb(),
                 Topic = topic,
                 Data = JsonSerializer.Serialize(message),
-                PersistentUtcTime = DateTime.UtcNow
+                CreatedUtcTime = DateTime.UtcNow
             };
-            await _connection.AddAsync(unpublishedMessage, _transaction);
+            await Connection.AddAsync(unpublishedMessage, Transaction);
         }
     }
 }

@@ -6,7 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Zaabee.MsgBus.Abstractions\Zaabee.MsgBus.Abstractions.csproj" />
+        <ProjectReference Include="..\Zaabee.MsgBus\Zaabee.MsgBus.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Zaabee.RabbitMQ" Version="2021.4.1" />
     </ItemGroup>
 
 </Project>

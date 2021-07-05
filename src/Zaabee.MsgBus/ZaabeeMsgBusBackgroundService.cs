@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Zaabee.MsgBus.Abstractions;
 using Zaabee.MsgBus.DapperExtensions;
-using Zaabee.SequentialGuid;
 
 namespace Zaabee.MsgBus
 {
@@ -17,10 +16,10 @@ namespace Zaabee.MsgBus
         private readonly IZaabeePublisher _publisher;
         private readonly IServiceProvider _serviceProvider;
 
-        public ZaabeeMsgBusBackgroundService(IZaabeePublisher publisher, IServiceProvider serviceProvider)
+        public ZaabeeMsgBusBackgroundService(IServiceProvider serviceProvider)
         {
-            _publisher = publisher;
-            _serviceProvider = serviceProvider.CreateScope().ServiceProvider;
+            _serviceProvider = serviceProvider;
+            _publisher = serviceProvider.GetService<IZaabeePublisher>();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -40,7 +39,7 @@ namespace Zaabee.MsgBus
                     await _publisher.PublishAsync(unpublishedMessage.ToCloudEvent(), stoppingToken);
 
                 await connection.DeleteAsync<UnpublishedMessage>(unpublishedMessages.Select(p => p.Id));
-                await connection.AddRangeAsync(unpublishedMessages.Select(p => new PublishedMessage(p)).ToList());
+                await connection.AddRangeAsync(unpublishedMessages.Select(p => p.ToPublishedMessage()).ToList());
 
                 lastPublishTime = DateTime.UtcNow;
             }
