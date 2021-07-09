@@ -3,8 +3,8 @@ using System.Data;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Zaabee.Dapper.Extensions;
 using Zaabee.MsgBus.Abstractions;
-using Zaabee.MsgBus.DapperExtensions;
 using Zaabee.SequentialGuid;
 
 namespace Zaabee.MsgBus

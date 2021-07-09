@@ -3,11 +3,10 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CloudNative.CloudEvents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Zaabee.Dapper.Extensions;
 using Zaabee.MsgBus.Abstractions;
-using Zaabee.MsgBus.DapperExtensions;
 
 namespace Zaabee.MsgBus
 {

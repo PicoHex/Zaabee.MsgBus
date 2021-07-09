@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Zaabee.MsgBus.Abstractions;
-using Zaabee.MsgBus.RabbitMQ;
 using Zaabee.RabbitMQ;
 using Zaabee.RabbitMQ.Abstractions;
 
@@ -28,25 +28,20 @@ namespace Zaabee.MsgBus.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             
-            services.AddMsgBus(p =>
+            services.AddTransient<IZaabeeMsgBus>(_ =>
+                new ZaabeeMsgBus(services.BuildServiceProvider().GetService<IDbTransaction>()));
+            services.AddSingleton<IZaabeeRabbitMqClient>(_ => new ZaabeeRabbitMqClient(new MqConfig
             {
-                services.AddOptions<ZaabeeMsgBusOptions>()
-                    .Configure<DbContext>((options, dbContext) =>
-                    {
-                        options.Transaction = dbContext.Database.CurrentTransaction
-                            .GetDbTransaction();
-                    });
-                services.AddSingleton<IZaabeeRabbitMqClient>(_=>new ZaabeeRabbitMqClient(new MqConfig
-                {
-                    AutomaticRecoveryEnabled = true,
-                    HeartBeat = TimeSpan.FromMinutes(1),
-                    NetworkRecoveryInterval = new TimeSpan(60),
-                    Hosts = new List<string> {"192.168.78.150"},
-                    UserName = "admin",
-                    Password = "123"
-                }, new Zaabee.NewtonsoftJson.Serializer()));
-            });
+                AutomaticRecoveryEnabled = true,
+                HeartBeat = TimeSpan.FromMinutes(1),
+                NetworkRecoveryInterval = new TimeSpan(60),
+                Hosts = new List<string> {"192.168.78.150"},
+                UserName = "admin",
+                Password = "123"
+            }, new Zaabee.NewtonsoftJson.Serializer()));
+            services.AddHostedService<ZaabeeMsgBusBackgroundService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Zaabee.MsgBus.Demo", Version = "v1"});
