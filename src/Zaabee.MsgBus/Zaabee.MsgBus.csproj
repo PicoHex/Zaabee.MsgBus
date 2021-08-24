@@ -6,12 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CloudNative.CloudEvents" Version="2.0.0" />
+        <PackageReference Include="CloudNative.CloudEvents" Version="2.1.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
         <PackageReference Include="System.Text.Json" Version="5.0.2" />
         <PackageReference Include="Zaabee.Dapper.Extensions" Version="0.0.7-alpha" />
-        <PackageReference Include="Zaabee.NewtonsoftJson" Version="2021.4.2" />
+        <PackageReference Include="Zaabee.NewtonsoftJson" Version="2021.5.0" />
         <PackageReference Include="Zaabee.SequentialGuid" Version="2021.1.0" />
     </ItemGroup>
 

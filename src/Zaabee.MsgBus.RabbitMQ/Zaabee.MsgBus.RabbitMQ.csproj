@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.RabbitMQ" Version="2021.4.1" />
+      <PackageReference Include="Zaabee.RabbitMQ.Abstractions" Version="2021.8.0" />
     </ItemGroup>
 
 </Project>
