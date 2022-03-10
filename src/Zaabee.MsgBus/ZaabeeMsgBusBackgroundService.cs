@@ -37,7 +37,7 @@ namespace Zaabee.MsgBus
                 foreach (var unpublishedMessage in unpublishedMessages)
                     await _publisher.PublishAsync(unpublishedMessage.ToCloudEvent(), stoppingToken);
 
-                await connection.DeleteAsync<UnpublishedMessage>(unpublishedMessages.Select(p => p.Id));
+                await connection.DeleteByIdsAsync<UnpublishedMessage>(unpublishedMessages.Select(p => p.Id));
                 await connection.AddRangeAsync(unpublishedMessages.Select(p => p.ToPublishedMessage()).ToList());
 
                 lastPublishTime = DateTime.UtcNow;
