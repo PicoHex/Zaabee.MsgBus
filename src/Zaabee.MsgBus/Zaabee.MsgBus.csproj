@@ -4,15 +4,15 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="CloudNative.CloudEvents" Version="2.3.1"/>
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1"/>
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0"/>
-		<PackageReference Include="System.Text.Json" Version="6.0.5"/>
-		<PackageReference Include="Zaabee.Dapper.Extensions" Version="0.0.10-alpha"/>
-		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2022.16.2"/>
-		<PackageReference Include="Zaabee.SequentialGuid" Version="2022.4.2"/>
+		<PackageReference Include="CloudNative.CloudEvents" Version="2.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.Text.Json" Version="6.0.5" />
+		<PackageReference Include="Zaabee.Dapper.Extensions" Version="0.0.10-alpha" />
+		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2022.16.2" />
+		<PackageReference Include="Zaabee.SequentialGuid" Version="2022.4.2" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Zaabee.MsgBus.Abstractions\Zaabee.MsgBus.Abstractions.csproj"/>
+		<ProjectReference Include="..\Zaabee.MsgBus.Abstractions\Zaabee.MsgBus.Abstractions.csproj" />
 	</ItemGroup>
 </Project>
