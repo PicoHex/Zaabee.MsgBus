@@ -9,8 +9,8 @@
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.Text.Json" Version="7.0.2" />
 		<PackageReference Include="Zaabee.Dapper.Extensions" Version="0.0.12-alpha" />
-		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2023.1.5" />
-		<PackageReference Include="Zaabee.SequentialGuid" Version="2023.1.0" />
+		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2023.2.0" />
+		<PackageReference Include="Zaabee.SequentialGuid" Version="2023.1.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Zaabee.MsgBus.Abstractions\Zaabee.MsgBus.Abstractions.csproj" />
