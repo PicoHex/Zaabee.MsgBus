@@ -24,14 +24,20 @@ namespace Zaabee.MsgBus.RabbitMQ
             _rabbitMqClient.PublishEvent(topic, message);
         }
 
-        public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
+        public Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
         {
-            await _rabbitMqClient.PublishEventAsync(message);
+            _rabbitMqClient.PublishEvent(message);
+            return Task.CompletedTask;
         }
 
-        public async Task PublishAsync<T>(string topic, T message, CancellationToken cancellationToken = default)
+        public Task PublishAsync<T>(
+            string topic,
+            T message,
+            CancellationToken cancellationToken = default
+        )
         {
-            await _rabbitMqClient.PublishEventAsync(topic, message);
+            _rabbitMqClient.PublishEvent(topic, message);
+            return Task.CompletedTask;
         }
     }
 }

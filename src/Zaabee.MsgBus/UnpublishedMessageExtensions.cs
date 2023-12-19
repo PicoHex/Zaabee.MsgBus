@@ -7,11 +7,16 @@ namespace Zaabee.MsgBus
     public static class UnpublishedMessageExtensions
     {
         internal static CloudEvent ToCloudEvent(this UnpublishedMessage message) =>
-            new(new[]
-            {
-                CloudEventAttribute.CreateExtension("retryLimit", CloudEventAttributeType.Integer),
-                CloudEventAttribute.CreateExtension("retry", CloudEventAttributeType.Integer)
-            })
+            new(
+                new[]
+                {
+                    CloudEventAttribute.CreateExtension(
+                        "retryLimit",
+                        CloudEventAttributeType.Integer
+                    ),
+                    CloudEventAttribute.CreateExtension("retry", CloudEventAttributeType.Integer)
+                }
+            )
             {
                 Id = message.Id.ToString(),
                 Type = message.Topic,

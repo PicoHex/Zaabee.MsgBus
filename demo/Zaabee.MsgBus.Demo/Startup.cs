@@ -26,22 +26,31 @@ namespace Zaabee.MsgBus.Demo
         {
             services.AddControllers();
 
-            
-            services.AddTransient<IZaabeeMsgBus>(_ =>
-                new ZaabeeMsgBus(services.BuildServiceProvider().GetService<IDbTransaction>()));
-            services.AddSingleton<IZaabeeRabbitMqClient>(_ => new ZaabeeRabbitMqClient(new MqConfig
-            {
-                AutomaticRecoveryEnabled = true,
-                HeartBeat = TimeSpan.FromMinutes(1),
-                NetworkRecoveryInterval = new TimeSpan(60),
-                Hosts = new List<string> {"192.168.78.150"},
-                UserName = "admin",
-                Password = "123"
-            }, new Zaabee.NewtonsoftJson.Serializer()));
+            services.AddTransient<IZaabeeMsgBus>(
+                _ => new ZaabeeMsgBus(services.BuildServiceProvider().GetService<IDbTransaction>())
+            );
+            services.AddSingleton<IZaabeeRabbitMqClient>(
+                _ =>
+                    new ZaabeeRabbitMqClient(
+                        new MqConfig
+                        {
+                            AutomaticRecoveryEnabled = true,
+                            HeartBeat = TimeSpan.FromMinutes(1),
+                            NetworkRecoveryInterval = new TimeSpan(60),
+                            Hosts = new List<string> { "192.168.78.150" },
+                            UserName = "admin",
+                            Password = "123"
+                        },
+                        new Zaabee.NewtonsoftJson.Serializer()
+                    )
+            );
             services.AddHostedService<ZaabeeMsgBusBackgroundService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Zaabee.MsgBus.Demo", Version = "v1"});
+                c.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Title = "Zaabee.MsgBus.Demo", Version = "v1" }
+                );
             });
         }
 
@@ -52,7 +61,9 @@ namespace Zaabee.MsgBus.Demo
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Zaabee.MsgBus.Demo v1"));
+                app.UseSwaggerUI(
+                    c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Zaabee.MsgBus.Demo v1")
+                );
             }
 
             app.UseHttpsRedirection();
@@ -61,7 +72,10 @@ namespace Zaabee.MsgBus.Demo
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

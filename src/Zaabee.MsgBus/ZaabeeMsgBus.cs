@@ -24,10 +24,7 @@ namespace Zaabee.MsgBus
             }
         }
 
-        public ZaabeeMsgBus()
-        {
-
-        }
+        public ZaabeeMsgBus() { }
 
         public ZaabeeMsgBus(IDbTransaction transaction)
         {
@@ -35,8 +32,7 @@ namespace Zaabee.MsgBus
             Transaction = transaction;
         }
 
-        public void Publish<T>(T message) =>
-            Publish(typeof(T).Namespace, message);
+        public void Publish<T>(T message) => Publish(typeof(T).Namespace, message);
 
         public void Publish<T>(string topic, T message)
         {
@@ -50,10 +46,16 @@ namespace Zaabee.MsgBus
             Connection.Add(unpublishedMessage, Transaction);
         }
 
-        public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default) =>
-            await PublishAsync(typeof(T).Namespace, message, cancellationToken);
+        public async Task PublishAsync<T>(
+            T message,
+            CancellationToken cancellationToken = default
+        ) => await PublishAsync(typeof(T).Namespace, message, cancellationToken);
 
-        public async Task PublishAsync<T>(string topic, T message, CancellationToken cancellationToken = default)
+        public async Task PublishAsync<T>(
+            string topic,
+            T message,
+            CancellationToken cancellationToken = default
+        )
         {
             var unpublishedMessage = new UnpublishedMessage
             {

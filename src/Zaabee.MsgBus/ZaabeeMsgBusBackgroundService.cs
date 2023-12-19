@@ -27,7 +27,8 @@ namespace Zaabee.MsgBus
             while (!stoppingToken.IsCancellationRequested)
             {
                 using var connection = _serviceProvider.GetService<IDbConnection>();
-                if (connection is null) throw new NullReferenceException(nameof(connection));
+                if (connection is null)
+                    throw new NullReferenceException(nameof(connection));
                 var ms = DateTime.UtcNow - lastPublishTime;
                 if (ms.Milliseconds < 100)
                     await Task.Delay(100 - ms.Milliseconds, stoppingToken);
@@ -37,8 +38,12 @@ namespace Zaabee.MsgBus
                 foreach (var unpublishedMessage in unpublishedMessages)
                     await _publisher.PublishAsync(unpublishedMessage.ToCloudEvent(), stoppingToken);
 
-                await connection.DeleteByIdsAsync<UnpublishedMessage>(unpublishedMessages.Select(p => p.Id));
-                await connection.AddRangeAsync(unpublishedMessages.Select(p => p.ToPublishedMessage()).ToList());
+                await connection.DeleteByIdsAsync<UnpublishedMessage>(
+                    unpublishedMessages.Select(p => p.Id)
+                );
+                await connection.AddRangeAsync(
+                    unpublishedMessages.Select(p => p.ToPublishedMessage()).ToList()
+                );
 
                 lastPublishTime = DateTime.UtcNow;
             }
