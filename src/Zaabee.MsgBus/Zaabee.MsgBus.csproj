@@ -10,6 +10,7 @@
 		<PackageReference Include="System.Text.Json" Version="8.0.0" />
 		<PackageReference Include="Zaabee.Dapper.Extensions" Version="0.0.12-alpha" />
 		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.RabbitMQ" Version="2023.11.2" />
 		<PackageReference Include="Zaabee.SequentialGuid" Version="2023.2.3" />
 	</ItemGroup>
 	<ItemGroup>
